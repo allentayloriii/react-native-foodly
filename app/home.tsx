@@ -1,14 +1,14 @@
 import { SafeAreaView, StyleSheet, Text } from "react-native";
 
-const WelcomeScreen = () => {
+const Home = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Welcome Screen</Text>
+    <SafeAreaView className="flex-1 justify-center items-center space-y-10 bg-amber-500">
+      <Text>Home Screen</Text>
     </SafeAreaView>
   );
 };
 
-export default WelcomeScreen;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {
