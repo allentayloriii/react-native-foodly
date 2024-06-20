@@ -1,9 +1,11 @@
-import { SafeAreaView, StyleSheet, Text } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 const WelcomeScreen = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Welcome Screen</Text>
+    <SafeAreaView>
+      <View className="flex-1 justify-center items-center space-y-10 bg-amber-500">
+        <Text>Welcome Screen</Text>
+      </View>
     </SafeAreaView>
   );
 };

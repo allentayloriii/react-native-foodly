@@ -1,10 +1,9 @@
 import { SafeAreaView, StyleSheet, Text } from "react-native";
-import { verifyInstallation } from "nativewind";
 
 const Index = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Home Screen</Text>
+    <SafeAreaView className="flex-1 justify-center items-center space-y-10 bg-amber-500">
+      <Text>Welcome Screen</Text>
     </SafeAreaView>
   );
 };
