@@ -1,4 +1,5 @@
 import { SafeAreaView, StyleSheet, Text } from "react-native";
+import { verifyInstallation } from "nativewind";
 
 const Index = () => {
   return (
