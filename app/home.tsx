@@ -1,21 +1,35 @@
+import Categories, { Category } from "@/components/Categories";
+import axios, { AxiosError } from "axios";
 import { Image } from "expo-image";
 import { StatusBar } from "expo-status-bar";
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { BellIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
-import Categories from "@/components/Categories";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 const Home = () => {
+  const [activeCategory, setActiveCategory] = useState("Beef");
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    getCatgories();
+    return () => {};
+  }, []);
+
+  const getCatgories = async () => {
+    try {
+      const response = await axios.get(
+        "https://themealdb.com/api/json/v1/1/categories.php"
+      );
+      if (response?.data) {
+        setCategories(response.data.categories as Category[]);
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      console.log("error: ", err.message);
+    }
+  };
+
   return (
     <View className="flex-1 bg-white">
       <StatusBar style="dark" />
@@ -25,7 +39,7 @@ const Home = () => {
         className="space-y-6 pt-14"
       >
         {/* avatar and bell icon */}
-        <View className="flex-row items-center justify-between mx-4 mb-2">
+        <View className="flex-row items-center justify-between mx-4 mb-10">
           <Image
             source={require("@/assets/images/icons8-male-user-100.png")}
             style={{ height: hp(5), width: hp(5.5) }}
@@ -33,7 +47,7 @@ const Home = () => {
           <BellIcon size={hp(4)} color="gray" />
         </View>
         {/* greetings and punchline */}
-        <View className="mx-4 mb-2 space-y-2">
+        <View className="mx-4 mb-8 space-y-2">
           <Text style={{ fontSize: hp(1.7) }} className="text-neutral-600">
             Hello, Allen!
           </Text>
@@ -53,7 +67,7 @@ const Home = () => {
           </Text>
         </View>
         {/* search bar */}
-        <View className="mx-4 flex-row items-center rounded-full bg-black/5 p-[6px]">
+        <View className="mx-4 mb-8 flex-row items-center rounded-full bg-black/5 p-[6px]">
           <TextInput
             placeholder="Search any recipe"
             placeholderTextColor={"gray"}
@@ -70,7 +84,11 @@ const Home = () => {
         </View>
         {/* categories */}
         <View>
-          <Categories />
+          <Categories
+            categories={categories}
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+          />
         </View>
       </ScrollView>
     </View>
