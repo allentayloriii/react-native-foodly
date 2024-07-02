@@ -1,4 +1,5 @@
 import Categories, { Category } from "@/components/Categories";
+import Recipes from "@/components/Recipes";
 import axios, { AxiosError } from "axios";
 import { Image } from "expo-image";
 import { StatusBar } from "expo-status-bar";
@@ -83,12 +84,18 @@ const Home = () => {
           </View>
         </View>
         {/* categories */}
+        <View className="mb-8">
+          {categories.length > 0 && (
+            <Categories
+              categories={categories}
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
+            />
+          )}
+        </View>
+        {/* recipies */}
         <View>
-          <Categories
-            categories={categories}
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-          />
+          <Recipes categories={categories} />
         </View>
       </ScrollView>
     </View>
