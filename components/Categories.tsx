@@ -14,13 +14,13 @@ export type Category = {
 type Props = {
   activeCategory: string;
   categories: Category[];
-  setActiveCategory: Dispatch<SetStateAction<string>>;
+  handleChangeCategory: (category: string) => void;
 };
 
 const Categories = ({
   activeCategory,
   categories,
-  setActiveCategory,
+  handleChangeCategory,
 }: Props) => {
   return (
     <Animated.View entering={FadeInDown.duration(500).springify()}>
@@ -37,7 +37,7 @@ const Categories = ({
             <Pressable
               key={index}
               className="flex items-center mx-2.5 space-y-1"
-              onPress={() => setActiveCategory(cat.strCategory)}
+              onPress={() => handleChangeCategory(cat.strCategory)}
             >
               <View className={`p-4 rounded-full ${activeButtonClass}`}>
                 <Image

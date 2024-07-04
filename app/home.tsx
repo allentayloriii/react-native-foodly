@@ -19,6 +19,12 @@ const Home = () => {
     return () => {};
   }, []);
 
+  const handleChangeCategory = (category: string) => {
+    getMeals(category);
+    setActiveCategory(category);
+    setMeals([]);
+  };
+
   const getCatgories = async () => {
     try {
       const response = await axios.get(
@@ -106,7 +112,7 @@ const Home = () => {
             <Categories
               categories={categories}
               activeCategory={activeCategory}
-              setActiveCategory={setActiveCategory}
+              handleChangeCategory={handleChangeCategory}
             />
           )}
         </View>
