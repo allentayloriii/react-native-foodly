@@ -29,11 +29,13 @@ const Meals = ({ categories, meals }: Props) => {
       <View>
         {categories.length > 0 && (
           <MasonryList
-            data={mealData}
+            data={meals}
             keyExtractor={(item): string => item.id}
             numColumns={2}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item, i }) => <MealCard item={item} index={i} />}
+            renderItem={({ item, i }) => (
+              <MealCard item={item as Meal} index={i} />
+            )}
             // refreshing={isLoadingNext}
             // onRefresh={() => refetch({ first: ITEM_CNT })}
             onEndReachedThreshold={0.1}
@@ -45,7 +47,12 @@ const Meals = ({ categories, meals }: Props) => {
   );
 };
 
-const MealCard = ({ item, index }) => {
+type MealCardProps = {
+  item: Meal;
+  index: number;
+};
+
+const MealCard = ({ item, index }: MealCardProps) => {
   let isEven = index % 2 === 0;
   return (
     <Animated.View
@@ -63,7 +70,7 @@ const MealCard = ({ item, index }) => {
         className="flex justify-center mb-4 space-y-1"
       >
         <Image
-          source={{ uri: item.image }}
+          source={{ uri: item.strMealThumb }}
           style={{
             width: "100%",
             height: index % 3 === 0 ? hp(25) : hp(35),
@@ -75,7 +82,9 @@ const MealCard = ({ item, index }) => {
           className="ml-2 font-semibold text-neutral-600"
           style={{ fontSize: hp(1.5) }}
         >
-          {item.name.length > 20 ? item.name.slice(0, 20) + "..." : item.name}
+          {item.strMeal.length > 20
+            ? item.strMeal.slice(0, 20) + "..."
+            : item.strMeal}
         </Text>
       </Pressable>
     </Animated.View>
