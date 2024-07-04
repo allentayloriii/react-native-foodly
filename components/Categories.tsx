@@ -1,11 +1,8 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { Dispatch, SetStateAction } from "react";
 import { Image } from "expo-image";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import React, { Dispatch, SetStateAction } from "react";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 export type Category = {
   strCategory: string;
@@ -61,7 +58,3 @@ const Categories = ({
 };
 
 export default Categories;
-
-const styles = StyleSheet.create({
-  container: {},
-});

@@ -1,5 +1,5 @@
 import Categories, { Category } from "@/components/Categories";
-import Recipes from "@/components/Recipes";
+import Meals, { Meal } from "@/components/Meals";
 import axios, { AxiosError } from "axios";
 import { Image } from "expo-image";
 import { StatusBar } from "expo-status-bar";
@@ -11,9 +11,11 @@ import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 const Home = () => {
   const [activeCategory, setActiveCategory] = useState("Beef");
   const [categories, setCategories] = useState<Category[]>([]);
+  const [meals, setMeals] = useState<Meal[]>([]);
 
   useEffect(() => {
     getCatgories();
+    getMeals();
     return () => {};
   }, []);
 
@@ -24,6 +26,21 @@ const Home = () => {
       );
       if (response?.data) {
         setCategories(response.data.categories as Category[]);
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      console.log("error: ", err.message);
+    }
+  };
+
+  const getMeals = async (category = "Beef") => {
+    try {
+      const response = await axios.get(
+        `https://themealdb.com/api/json/v1/1/filter.php?c=${category}`
+      );
+      // console.log("got recipes: ", response.data);
+      if (response?.data) {
+        setMeals(response.data.meals as Meal[]);
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -93,9 +110,9 @@ const Home = () => {
             />
           )}
         </View>
-        {/* recipies */}
+        {/* meals */}
         <View>
-          <Recipes categories={categories} />
+          <Meals categories={categories} meals={meals} />
         </View>
       </ScrollView>
     </View>
