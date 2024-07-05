@@ -47,9 +47,7 @@ const MealDetail = () => {
               style={{
                 width: wp(98),
                 height: hp(50),
-                borderRadius: 53,
-                borderBottomLeftRadius: 40,
-                borderBottomRightRadius: 40,
+                borderRadius: 20,
                 marginTop: 4,
               }}
             />
