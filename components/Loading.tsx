@@ -2,6 +2,7 @@ import { View, Text, ActivityIndicator } from "react-native";
 
 type Props = {
   size: number | "small" | "large" | undefined;
+  [x: string]: any;
 };
 
 const Loading = ({ size, ...rest }: Props) => {

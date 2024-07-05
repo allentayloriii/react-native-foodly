@@ -1,6 +1,7 @@
+import CachedImage from "@/utils/CachedImage";
 import { Image } from "expo-image";
 import React, { Dispatch, SetStateAction } from "react";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Platform, Pressable, ScrollView, Text, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
@@ -40,11 +41,19 @@ const Categories = ({
               onPress={() => handleChangeCategory(cat.strCategory)}
             >
               <View className={`p-4 rounded-full ${activeButtonClass}`}>
-                <Image
-                  source={{ uri: cat.strCategoryThumb }}
-                  style={{ width: hp(6), height: hp(6) }}
-                  className="rounded-full"
-                />
+                {Platform.OS === "android" ? (
+                  <Image
+                    source={{ uri: cat.strCategoryThumb }}
+                    style={{ width: hp(6), height: hp(6) }}
+                    className="rounded-full"
+                  />
+                ) : (
+                  <CachedImage
+                    uri={cat.strCategoryThumb}
+                    style={{ width: hp(6), height: hp(6) }}
+                    className="rounded-full"
+                  />
+                )}
               </View>
               <Text className="text-neutral-600" style={{ fontSize: hp(1.6) }}>
                 {cat.strCategory}

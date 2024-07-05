@@ -1,11 +1,12 @@
-import { mealData } from "@/constants/index";
+import CachedImage from "@/utils/CachedImage";
 import MasonryList from "@react-native-seoul/masonry-list";
-import { Image } from "expo-image";
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Platform, Pressable, Text, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { Category } from "./Categories";
+import Loading from "./Loading";
+import { Image } from "expo-image";
 
 export type Meal = {
   idMeal: string;
@@ -27,7 +28,7 @@ const Meals = ({ categories, meals }: Props) => {
         Meals
       </Text>
       <View>
-        {categories.length > 0 && (
+        {categories.length > 0 && meals.length > 0 ? (
           <MasonryList
             data={meals}
             keyExtractor={(item): string => item.id}
@@ -41,6 +42,8 @@ const Meals = ({ categories, meals }: Props) => {
             onEndReachedThreshold={0.1}
             // onEndReached={() => loadNext(ITEM_CNT)}
           />
+        ) : (
+          <Loading size="large" className="mt-20" />
         )}
       </View>
     </View>
@@ -69,15 +72,27 @@ const MealCard = ({ item, index }: MealCardProps) => {
         }}
         className="flex justify-center mb-4 space-y-1"
       >
-        <Image
-          source={{ uri: item.strMealThumb }}
-          style={{
-            width: "100%",
-            height: index % 3 === 0 ? hp(25) : hp(35),
-            borderRadius: 35,
-          }}
-          className="bg-black/5"
-        />
+        {Platform.OS === "android" ? (
+          <Image
+            source={{ uri: item.strMealThumb }}
+            style={{
+              width: "100%",
+              height: index % 3 === 0 ? hp(25) : hp(35),
+              borderRadius: 35,
+            }}
+            className="bg-black/5"
+          />
+        ) : (
+          <CachedImage
+            uri={item.strMealThumb}
+            style={{
+              width: "100%",
+              height: index % 3 === 0 ? hp(25) : hp(35),
+              borderRadius: 35,
+            }}
+            className="bg-black/5"
+          />
+        )}
         <Text
           className="ml-2 font-semibold text-neutral-600"
           style={{ fontSize: hp(1.5) }}
