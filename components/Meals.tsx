@@ -1,12 +1,13 @@
 import CachedImage from "@/utils/CachedImage";
 import MasonryList from "@react-native-seoul/masonry-list";
+import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Platform, Pressable, Text, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { Category } from "./Categories";
 import Loading from "./Loading";
-import { Image } from "expo-image";
 
 export type Meal = {
   idMeal: string;
@@ -37,10 +38,7 @@ const Meals = ({ categories, meals }: Props) => {
             renderItem={({ item, i }) => (
               <MealCard item={item as Meal} index={i} />
             )}
-            // refreshing={isLoadingNext}
-            // onRefresh={() => refetch({ first: ITEM_CNT })}
             onEndReachedThreshold={0.1}
-            // onEndReached={() => loadNext(ITEM_CNT)}
           />
         ) : (
           <Loading size="large" className="mt-20" />
@@ -56,6 +54,7 @@ type MealCardProps = {
 };
 
 const MealCard = ({ item, index }: MealCardProps) => {
+  const router = useRouter();
   let isEven = index % 2 === 0;
   return (
     <Animated.View
@@ -71,6 +70,9 @@ const MealCard = ({ item, index }: MealCardProps) => {
           paddingRight: isEven ? 8 : 0,
         }}
         className="flex justify-center mb-4 space-y-1"
+        onPress={() => {
+          router.navigate({ pathname: "mealdetail", params: item });
+        }}
       >
         {Platform.OS === "android" ? (
           <Image
