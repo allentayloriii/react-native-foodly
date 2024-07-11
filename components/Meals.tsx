@@ -14,6 +14,7 @@ export type Meal = {
   strMeal: string;
   strMealThumb: string;
 };
+
 type Props = {
   categories: Category[];
   meals: Meal[];
@@ -93,6 +94,7 @@ const MealCard = ({ item, index }: MealCardProps) => {
               borderRadius: 35,
             }}
             className="bg-black/5"
+            sharedTransitionTag={item.strMeal}
           />
         )}
         <Text
