@@ -101,7 +101,7 @@ const MealDetail = () => {
                 borderBottomRightRadius: 40,
                 marginTop: 4,
               }}
-              sharedTransitionTag={item.strMeal}
+              // sharedTransitionTag={item.strMeal}
             />
           ) : (
             <Image
