@@ -31,15 +31,15 @@ const Index = () => {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 justify-center items-center space-y-10 bg-amber-500">
+    <SafeAreaView className="items-center justify-center flex-1 space-y-10 bg-amber-500">
       <StatusBar style="light" />
       {/* logo image with rings */}
       <Animated.View
-        className="bg-white/20 rounded-full"
+        className="rounded-full bg-white/20"
         style={{ padding: ring2Padding }}
       >
         <Animated.View
-          className="bg-white/20 rounded-full"
+          className="rounded-full bg-white/20"
           style={{ padding: ring1Padding }}
         >
           <Image
@@ -49,16 +49,16 @@ const Index = () => {
         </Animated.View>
       </Animated.View>
       {/* title and punchline */}
-      <View className="flex items-center space-y-2 mt-10">
+      <View className="flex items-center mt-10 space-y-2">
         <Text
           style={{ fontSize: hp(7) }}
-          className="font-bold text-white tracking-widest text-6xl"
+          className="text-6xl font-bold tracking-widest text-white"
         >
           Foodly
         </Text>
         <Text
           style={{ fontSize: hp(2) }}
-          className="font-medium text-white tracking-widest text-lg"
+          className="text-lg font-medium tracking-widest text-white"
         >
           Food Above All Else
         </Text>
