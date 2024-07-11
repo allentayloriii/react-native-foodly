@@ -94,7 +94,7 @@ const MealCard = ({ item, index }: MealCardProps) => {
               borderRadius: 35,
             }}
             className="bg-black/5"
-            sharedTransitionTag={item.strMeal}
+            // sharedTransitionTag={item.strMeal}
           />
         )}
         <Text
