@@ -46,7 +46,6 @@ const MealDetail = () => {
       const response = await axios.get(
         `https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`
       );
-      console.log("got meal data: ", response.data);
       const meals: MealDetailType[] = response.data.meals as MealDetailType[];
       if (response?.data) {
         setMeal(meals[0]);

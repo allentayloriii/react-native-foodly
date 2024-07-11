@@ -44,7 +44,6 @@ const Home = () => {
       const response = await axios.get(
         `https://themealdb.com/api/json/v1/1/filter.php?c=${category}`
       );
-      // console.log("got recipes: ", response.data);
       if (response?.data) {
         setMeals(response.data.meals as Meal[]);
       }
